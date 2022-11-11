@@ -32,19 +32,19 @@ class p021 {
 				sum = sum + i;
 		}
 		
-		return sum;
+		return sum; //return the sum of amicable numbers under 1000
 	}
 
-
+	// returns true if the number is amicable
     public static boolean isAmicableNum(int n) {
 
 		int x = divisorSum(n);
 		int y = divisorSum(x);
 
-		return x != n && y == n;
+		return x != n && y == n; //If d(a) = b and d(b) = a, where a ≠ b, then a and b are an amicable pair and each of a and b are called amicable numbers.
 	}
-
-	private static int divisorSum(int d) {
+	//sum all the divisors, the range is [1 , d/2]
+	public static int divisorSum(int d) {
 
 		int sum = 0;
 		for (int i = 1; i <= d / 2; i++) {

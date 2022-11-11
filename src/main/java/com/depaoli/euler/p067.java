@@ -18,39 +18,35 @@ class p067 {
     public static void main(String args[]) {
 
         System.out.println("Euler problem #067 solution");
-
 		System.out.println("result from algorithm: " + MaxPathSum());
         
     }
-
+    // function that calculates the maxpath
     public static String MaxPathSum() {
 
         int[][] triangle = new int[100][100];
 
-        readTriangle(triangle);
-        //printTriangle(triangle);
-       // System.out.println(Integer.toString(triangle.length));
-       // System.out.println(Integer.toString(triangle[99].length));
-    
-        for (int i = triangle.length - 2; i >=0; --i) { // triangle.length gives me the number of rows //numero di somme che deve fare for esempio la prima riga ne avra solo una perchè la riga sotto hja solo due elementi da confrondqtar
-			
-            for (int j = 0; j < triangle[i].length - 1; ++j) {// triangle[i].length gives me the lenght of that row (number of columns)
+        readTriangle(triangle); // after reading the triangle from the file we save it in the matrix. 
+        
+        for (int i = triangle.length - 2; i >=0; --i) { // number of sums it must do for example the first line will only have one because the line below has only two elements to compare
+                                                        // triangle.length gives me the number of rows
+
+            for (int j = 0; j < triangle[i].length - 1; ++j) { // triangle[i].length gives me the lenght of that row (number of columns)
                                                         
-            triangle[i][j] += Math.max(triangle[i + 1][j], triangle[i + 1][j + 1]); 
+            triangle[i][j] = triangle[i][j] + Math.max(triangle[i + 1][j], triangle[i + 1][j + 1]); // add the maximum between the two numbers that are touched below to the number taken into consideration
             
             }
 		}
-
-		return Integer.toString(triangle[0][0]); //return the max path sum that is in the [0][0] position
-
+		return Integer.toString(triangle[0][0]); //return the max path sum that is in the triangle[0][0] position
     }
 
+    // allows you to read the trinangle from a text file 
     public static void readTriangle(int[][] triangle) {
 
         try {
             // read in the data
             Scanner input = new Scanner (new File("/Users/alessiodepaoli/ProjectEuler-2022/txt-files/p067_triangle.txt"));
-            int x=1;
+            int x=1; // x corresponds to the line you are reading
             for(int a = 0; a < 100; a++)
             {
                 for(int b = 0; b < x; b++)
@@ -58,12 +54,9 @@ class p067 {
                     if(input.hasNextInt())
                     {
                         triangle[a][b] = input.nextInt();
-                        //System.out.println(Integer.toString(triangle[i][j]));
                     }
                 }
-                x = x + 1;
-                //System.out.println("/n");
-                
+                x = x + 1; // x goes up as you go to optimise the for loop
             }
 
         } catch (IOException e) {
